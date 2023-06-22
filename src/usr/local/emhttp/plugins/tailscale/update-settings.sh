@@ -19,6 +19,10 @@ if [ ! -d /boot/config/plugins/tailscale/state ] && [ ! -f $TS_PLUGIN_CONFIG ]; 
     cp $TS_PLUGIN_ROOT/tailscale.cfg.default $TS_PLUGIN_CONFIG
 fi
 
+if [ -f $TS_PLUGIN_CONFIG ]; then
+    source $TS_PLUGIN_CONFIG
+fi
+
 log "Running pre-startup script"
 $TS_PLUGIN_ROOT/pre-startup.php
 
