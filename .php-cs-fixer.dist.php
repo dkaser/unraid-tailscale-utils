@@ -2,7 +2,6 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->files()
-    ->name('*.page')
     ->in(__DIR__)
 ;
 

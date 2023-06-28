@@ -5,7 +5,7 @@ function printRow($title, $value)
     return "<tr><td>{$title}</td><td>{$value}</td></tr>" . PHP_EOL;
 }
 
-function getStatusInfo($status, $prefs)
+function getStatusInfo($status, $prefs, $lock)
 {
     $tsVersion     = isset($status->Version) ? $status->Version : "Unknown";
     $keyExpiration = isset($status->Self->KeyExpiry) ? $status->Self->KeyExpiry : "Disabled";
@@ -14,6 +14,7 @@ function getStatusInfo($status, $prefs)
     $tags          = isset($status->Self->Tags) ? implode("<br />", $status->Self->Tags) : "";
     $loggedIn      = isset($prefs->LoggedOut) ? ($prefs->LoggedOut ? "No" : "Yes") : "Unknown";
     $tsHealth      = isset($status->Health) ? implode("<br />", $status->Health) : "";
+    $lockEnabled   = getTailscaleLockEnabled($lock) ? "Yes" : "No";
 
     $output = "";
     $output .= printRow("Tailscale Version", $tsVersion);
@@ -23,6 +24,19 @@ function getStatusInfo($status, $prefs)
     $output .= printRow("Online", $online);
     $output .= printRow("Key Expiration", $keyExpiration);
     $output .= printRow("Tags", $tags);
+    $output .= printRow("Tailscale Lock: Enabled", $lockEnabled);
+
+    if (getTailscaleLockEnabled($lock)) {
+        $lockSigned  = getTailscaleLockSigned($lock) ? "Yes" : "No";
+        $lockSigning = getTailscaleLockSigning($lock) ? "Yes" : "No";
+        $pubKey      = getTailscaleLockPubkey($lock);
+        $nodeKey     = getTailscaleLockNodekey($lock);
+
+        $output .= printRow("Tailscale Lock: Node Key Signed", $lockSigned);
+        $output .= printRow("Tailscale Lock: Is Signing Node", $lockSigning);
+        $output .= printRow("Tailscale Lock: Node Key", $nodeKey);
+        $output .= printRow("Tailscale Lock: Public Key", $pubKey);
+    }
 
     return $output;
 }
