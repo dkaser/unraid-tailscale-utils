@@ -4,7 +4,6 @@ TS_PLUGIN_CONFIG=/boot/config/plugins/tailscale/tailscale.cfg
 TS_PLUGIN_ROOT=/usr/local/emhttp/plugins/tailscale
 
 log() {
-    echo "$1"
     logger -t unraid-tailscale "$1"
 }
 
