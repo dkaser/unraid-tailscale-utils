@@ -1,0 +1,28 @@
+{
+    "commands": [
+        {
+            "command": "tailscale status",
+            "file": "tailscale-status.txt"
+        },
+        {
+            "command": "tailscale debug prefs",
+            "file": "tailscale-debug-prefs.txt"
+        },
+        {
+            "command": "tailscale lock status",
+            "file": "tailscale-lock-status.txt"
+        },
+        {
+            "command": "ls -Rl /usr/local/emhttp/plugins/tailscale/",
+            "file": "plugin-files.txt"
+        },
+        {
+            "command": "ls -l /boot/config/plugins/tailscale/",
+            "file": "config-files.txt"
+        }
+    ],
+    "files": [
+        "/boot/config/plugins/tailscale/tailscale.cfg"
+    ],
+    "system_diagnostics": true
+}

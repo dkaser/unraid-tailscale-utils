@@ -4,6 +4,10 @@ Title="Help"
 Tag="question"
 Type="xmenu"
 ---
+## Diagnostics
+
+[Download diagnostic package](/plugins/plugin-diagnostics/download.php?plugin=tailscale) (this may take some time to complete)
+
 ## Initial Configuration
 
 You may want to disable key expiration for your server (either by using an 
