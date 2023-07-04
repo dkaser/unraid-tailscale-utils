@@ -25,3 +25,4 @@ $tailscale_output['lock_signing'] = getTailscaleLockSigning($tailscale_lock);
 $tailscale_output['lock_pending'] = getTailscaleLockPending($tailscale_lock);
 $tailscale_output['lock_pubkey']  = getTailscaleLockPubkey($tailscale_lock);
 $tailscale_output['lock_nodekey'] = getTailscaleLockNodekey($tailscale_lock);
+$tailscale_output['lock_warning'] = getTailscaleLockWarning($tailscale_lock);

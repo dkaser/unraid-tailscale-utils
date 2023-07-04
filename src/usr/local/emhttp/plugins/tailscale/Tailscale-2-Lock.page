@@ -9,41 +9,16 @@ $signingNode = false;
 
 switch (true) {
     case $tailscale_output['lock_signing']:
-        $signingNode = true;
+        require "{$docroot}/plugins/tailscale/include/tailscale-lock/signing.php";
         break;
     case $tailscale_output['lock_signed']:
-        echo "Your tailnet has lock enabled and the current node is signed. This is not currently a signing node.<br />";
-        echo "If you wish to make this a signing node, you will need to trust the following key from a signing node:<br /><br />";
-        echo $tailscale_output['lock_pubkey'];
+        require "{$docroot}/plugins/tailscale/include/tailscale-lock/signed.php";
         break;
     case $tailscale_output['lock_enabled']:
-        echo "Your tailnet has lock enabled and the current node is not signed. This node will not be able to communicate with the tailnet.<br />";
-        echo "To enable this node, trust the following key from a signing node:<br /><br />";
-        echo $tailscale_output['lock_nodekey'];
+        require "{$docroot}/plugins/tailscale/include/tailscale-lock/locked.php";
         break;
     default:
-        echo "Your tailnet does not have lock enabled.";
+        require "{$docroot}/plugins/tailscale/include/tailscale-lock/disabled.php";
         break;
 }
-
-if ($signingNode) {
 ?>
-
-<form markdown="1" method="POST" action="/update.php" target="progressFrame">
-<input type="hidden" name="#command" value="/usr/local/emhttp/plugins/tailscale/approve-nodes.php" />
-
-### Tailscale Lock: Approve Nodes
-
-<table style="margin-top: 5px;">
-<?php
-foreach ($tailscale_output['lock_pending'] as $lockHost => $lockKey) {
-    echo "<tr><td><input type='checkbox' name='#arg[]' value='{$lockKey}' /></td><td>{$lockHost}<br />{$lockKey}</td></tr>";
-}
-?>
-</table>
-
-<input type="submit" name="#apply" value="Approve">
-</form>
-
-
-<?php } ?>

@@ -64,3 +64,11 @@ function getTailscaleLockPending($lock)
 
     return $pending;
 }
+
+function getTailscaleLockWarning($lock)
+{
+    if (getTailscaleLockEnabled($lock) && ( ! getTailscaleLockSigned($lock))) {
+        return "<span class='error' style='text-align: center; font-size: 1.4em; font-weight: bold;'>The tailnet has lock enabled, but this node has not been signed. It will not be able to communicate with the tailnet.</span>";
+    }
+    return "";
+}
