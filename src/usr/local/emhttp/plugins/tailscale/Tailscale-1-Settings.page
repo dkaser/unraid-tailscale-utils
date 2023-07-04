@@ -81,6 +81,14 @@ Accept DNS
 : <input type="submit" name="#apply" value="Apply"><input type="button" id="DONE" value="Done" onclick="done()">
 </form>
 
+### Restart Tailscale
+
+<form markdown="1" method="POST" action="/update.php" target="progressFrame">
+<input type="hidden" name="#command" value="/usr/local/emhttp/plugins/tailscale/restart.sh" />
+Restart the Tailscale daemon and reapply settings.
+: <input type="submit" value="Restart">
+</form>
+
 <script src="<?autov('/webGui/javascript/jquery.filetree.js')?>" charset="utf-8"></script>
 <script>
     $(function() {
