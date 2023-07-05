@@ -30,7 +30,7 @@ if [[ $SYSCTL_IP_FORWARD ]]; then
 
     echo 'net.ipv4.ip_forward = 1' > /etc/sysctl.d/99-tailscale.conf
     echo 'net.ipv6.conf.all.forwarding = 1' >> /etc/sysctl.d/99-tailscale.conf
-    sysctl -p /etc/sysctl.d/99-tailscale.conf 
+    sysctl -qp /etc/sysctl.d/99-tailscale.conf 
 fi
 
 if [[ $TAILDROP_DIR && -d "$TAILDROP_DIR" && -x "$TAILDROP_DIR" ]]; then
