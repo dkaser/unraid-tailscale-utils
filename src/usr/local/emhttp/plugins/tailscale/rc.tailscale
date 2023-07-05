@@ -2,7 +2,6 @@
 # /etc/rc.d/rc.tailscaled - start/stop the tailscaled daemon
 
 log() {
-  echo "$1"
   logger -t unraid-tailscale "$1"
 }
 
