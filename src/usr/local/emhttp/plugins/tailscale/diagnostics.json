@@ -5,7 +5,7 @@
             "file": "tailscale-status.txt"
         },
         {
-            "command": "tailscale debug prefs",
+            "command": "tailscale debug prefs | jq 'del(.Config)'",
             "file": "tailscale-debug-prefs.txt"
         },
         {
@@ -19,10 +19,30 @@
         {
             "command": "ls -l /boot/config/plugins/tailscale/",
             "file": "config-files.txt"
+        },
+        {
+            "command": "iptables -L -n -v",
+            "file": "iptables.txt"
+        },
+        {
+            "command": "ip link",
+            "file": "ip-link.txt"
+        },
+        {
+            "command": "ip address",
+            "file": "ip-address.txt"
+        },
+        {
+            "command": "docker network inspect host",
+            "file": "docker-network-host.txt"
         }
     ],
     "files": [
-        "/boot/config/plugins/tailscale/tailscale.cfg"
+        "/boot/config/plugins/tailscale/tailscale.cfg",
+        "/etc/resolv.conf",
+        "/etc/ssh/sshd_config",
+        "/etc/nginx/conf.d/servers.conf",
+        "/etc/samba/smb-names.conf"
     ],
     "system_diagnostics": true
 }
