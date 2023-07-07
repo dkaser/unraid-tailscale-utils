@@ -8,13 +8,15 @@ log() {
 start_tailscaled() {
   if ! /usr/bin/pgrep --ns $$ --euid root -f "^/usr/local/sbin/tailscaled" 1> /dev/null 2> /dev/null ; then
     log "Starting tailscaled: /usr/local/sbin/tailscaled"
-    mkdir -p /boot/config/plugins/tailscale/state 
+    mkdir -p /boot/config/plugins/tailscale/state
     /usr/local/sbin/tailscaled -statedir /boot/config/plugins/tailscale/state -tun tailscale1 2>&1 | logger -t tailscaled &
+    nohup /usr/local/emhttp/plugins/tailscale/tailscale-watcher.php 1>/dev/null 2>&1 &
   fi
 }
 
 stop_tailscaled() {
   log "Stopping tailscaled."
+  killall --ns $$ --wait tailscale-watcher.php 2> /dev/null
   killall --ns $$ --wait tailscaled 2> /dev/null
 }
 
