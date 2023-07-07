@@ -1,11 +1,9 @@
 #!/bin/bash
 
+. /usr/local/emhttp/plugins/tailscale/log.sh
+
 TS_PLUGIN_CONFIG=/boot/config/plugins/tailscale/tailscale.cfg
 TS_PLUGIN_ROOT=/usr/local/emhttp/plugins/tailscale
-
-log() {
-    logger -t unraid-tailscale "$1"
-}
 
 # Cleanup Taildrop emulation from pre-1.42.0
 if [ ! -s /etc/config/uLinux.conf ] && [ -f /etc/config/uLinux.conf ]; then

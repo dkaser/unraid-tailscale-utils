@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <?php
 
-require "include/common.php";
+require_once "include/common.php";
 
 $version = parse_ini_file('/etc/unraid-version');
 

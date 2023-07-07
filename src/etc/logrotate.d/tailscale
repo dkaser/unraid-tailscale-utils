@@ -1,0 +1,17 @@
+/var/log/tailscale.log {
+   compress
+   rotate 4
+   size 1M
+   notifempty
+   missingok
+   copytruncate
+}
+
+/var/log/tailscale-utils.log {
+   compress
+   rotate 4
+   size 1M
+   notifempty
+   missingok
+   copytruncate
+}

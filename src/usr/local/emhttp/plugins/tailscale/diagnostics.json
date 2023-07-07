@@ -42,7 +42,9 @@
         "/etc/resolv.conf",
         "/etc/ssh/sshd_config",
         "/etc/nginx/conf.d/servers.conf",
-        "/etc/samba/smb-names.conf"
+        "/etc/samba/smb-names.conf",
+        "/var/log/tailscale.log",
+        "/var/log/tailscale-utils.log"
     ],
     "system_diagnostics": true
 }
