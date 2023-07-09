@@ -42,34 +42,3 @@ if [[ $TAILDROP_DIR && -d "$TAILDROP_DIR" && -x "$TAILDROP_DIR" ]]; then
 fi
 
 /etc/rc.d/rc.tailscale restart
-
-sleep 60
-
-case "$ACCEPT_ROUTES" in
-'0')
-    /usr/local/sbin/tailscale set --accept-routes=false
-    log "/usr/local/sbin/tailscale set --accept-routes=false"
-    ;;
-'1')
-    /usr/local/sbin/tailscale set --accept-routes=true
-    log "/usr/local/sbin/tailscale set --accept-routes=true"
-    ;;
-*)
-    log "Ignoring accept-routes"
-esac
-
-case "$ACCEPT_DNS" in
-'0')
-    /usr/local/sbin/tailscale set --accept-dns=false
-    log "/usr/local/sbin/tailscale set --accept-dns=false"
-    ;;
-'1')
-    /usr/local/sbin/tailscale set --accept-dns=true
-    log "/usr/local/sbin/tailscale set --accept-dns=true"
-    ;;
-*)
-    log "Ignoring accept-dns"
-esac
-
-log "Running post-startup script"
-$TS_PLUGIN_ROOT/post-startup.php
