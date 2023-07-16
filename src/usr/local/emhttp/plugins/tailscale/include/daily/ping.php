@@ -11,7 +11,8 @@ if ($tailscale_config['USAGE']) {
     $query   = array(
         'clientId' => hash("crc32b", $var['flashGUID']),
         'plugin'   => 'tailscale',
-        'version'  => $version['VERSION']
+        'version'  => $version['VERSION'],
+        'unraid'   => $var['version']
     );
 
     $queryString = http_build_query($query);
