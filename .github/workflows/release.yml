@@ -11,7 +11,7 @@ jobs:
 
       - run: |
           cd src
-          tar -cJf ../unraid-tailscale-utils-${{ github.event.release.name}}-noarch-1.txz *
+          tar --owner=0 --group=0 -cJf ../unraid-tailscale-utils-${{ github.event.release.name}}-noarch-1.txz *
 
       - uses: shogo82148/actions-upload-release-asset@v1
         with:
