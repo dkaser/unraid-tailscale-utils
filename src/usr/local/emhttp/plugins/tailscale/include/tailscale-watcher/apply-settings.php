@@ -1,27 +1,35 @@
 <?php
 
+function run_command($command)
+{
+    $output = null;
+    $retval = null;
+    logmsg($command);
+    exec("{$command} 2>&1", $output, $retval);
+    if ($retval != 0) {
+        logmsg("Command returned {$retval}" . PHP_EOL . implode(PHP_EOL, $output));
+    }
+}
+
 $command = "Ignoring accept-routes";
 switch ($settings_config['ACCEPT_ROUTES']) {
     case 0:
-        $command = "/usr/local/sbin/tailscale set --accept-routes=false";
-        exec($command);
+        run_command("/usr/local/sbin/tailscale set --accept-routes=false");
         break;
     case 1:
-        $command = "/usr/local/sbin/tailscale set --accept-routes=true";
-        exec($command);
+        run_command("/usr/local/sbin/tailscale set --accept-routes=true");
         break;
+    default:
+        logmsg("Ignoring accept-routes");
 }
-logmsg($command);
 
-$command = "Ignoring accept-dns";
 switch ($settings_config['ACCEPT_DNS']) {
     case 0:
-        $command = "/usr/local/sbin/tailscale set --accept-dns=false";
-        exec($command);
+        run_command("/usr/local/sbin/tailscale set --accept-dns=false");
         break;
     case 1:
-        $command = "/usr/local/sbin/tailscale set --accept-dns=true";
-        exec($command);
+        run_command("/usr/local/sbin/tailscale set --accept-dns=true");
         break;
+    default:
+        logmsg("Ignoring accept-dns");
 }
-logmsg($command);

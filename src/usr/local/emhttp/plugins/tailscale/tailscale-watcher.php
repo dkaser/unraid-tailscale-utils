@@ -30,6 +30,5 @@ while (true) {
         foreach (glob("{$docroot}/plugins/tailscale/include/tailscale-watcher/*.php") as $file) {
             require_once $file;
         }
-        
     }
 }
