@@ -53,6 +53,15 @@ Taildrop Location
 > Specify the path for incoming Taildrop files.
 > If Taildrop is configured, Tailscale will be automatically restarted when the array starts or stops.
 
+Allow Usage Data Collection
+: <select name='USAGE' size='1'>
+    <?= mk_option($tailscale_config["USAGE"], '1', "Yes");?>
+    <?= mk_option($tailscale_config["USAGE"], '0', "No");?>
+</select>
+
+> Allows collection of usage data for the Tailscale plugin.
+> This sends an anonymized identifier and the current version of the plugin.
+
 ### Tailscale Settings
 
 Accept Routes

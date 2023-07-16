@@ -2,5 +2,9 @@
 	"INCLUDE_INTERFACE": {
 		"default": "1",
 		"description": "Adds tailscale interface to Unraid services"
+	},
+    "USAGE": {
+		"default": "1",
+		"description": "Allow collection of usage data"
 	}
 }

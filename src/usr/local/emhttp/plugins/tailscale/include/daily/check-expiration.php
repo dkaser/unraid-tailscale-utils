@@ -1,9 +1,4 @@
-#!/usr/bin/php -q
 <?php
-
-require_once "include/common.php";
-
-$docroot = $docroot ?? $_SERVER['DOCUMENT_ROOT'] ?: '/usr/local/emhttp';
 
 $notify = "{$docroot}/webGui/scripts/notify";
 
