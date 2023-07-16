@@ -24,7 +24,7 @@ if (isset($status->Self->KeyExpiry)) {
             $priority = 'warning';
             break;
         default:
-            exit;
+            return;
     }
 
     $event = "Tailscale Key Expiration - {$priority} - {$expiryTime->format('Ymd')}";
