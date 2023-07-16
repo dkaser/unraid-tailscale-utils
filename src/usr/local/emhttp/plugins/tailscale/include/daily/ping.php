@@ -16,6 +16,8 @@ if ($tailscale_config['USAGE']) {
 
     $queryString = http_build_query($query);
 
+    sleep(rand(0, 60));
+
     logmsg("Sending usage data: {$queryString}");
 
     $request = file_get_contents("{$endpoint}?{$queryString}");
