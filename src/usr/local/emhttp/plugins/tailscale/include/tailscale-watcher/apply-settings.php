@@ -21,3 +21,14 @@ switch ($tailscale_config['ACCEPT_DNS']) {
     default:
         logmsg("Ignoring accept-dns");
 }
+
+switch ($tailscale_config['SSH']) {
+    case "0":
+        run_command("/usr/local/sbin/tailscale set --ssh=false");
+        break;
+    case "1":
+        run_command("/usr/local/sbin/tailscale set --ssh=true");
+        break;
+    default:
+        logmsg("Ignoring ssh");
+}

@@ -84,6 +84,17 @@ Accept DNS
 > Accept DNS from the tailnet.
 > If set to "Ignore", the plugin will not modify the setting.
 
+Enable SSH
+: <select name='SSH' size='1'>
+    <?= mk_option($tailscale_config['SSH'], '0', "No");?>
+    <?= mk_option($tailscale_config['SSH'], '1', "Yes");?>
+    <?= mk_option($tailscale_config['SSH'], '2', "Ignore");?>
+</select>
+
+> Enable SSH access in Tailscale Admin Console
+> If set to "Ignore", the plugin will not modify the setting.
+
+
 ### Save Settings
 
 **Tailscale will be restarted when changes are applied.**
