@@ -7,6 +7,17 @@ function logmsg($message, $priority = LOG_INFO)
     file_put_contents("/var/log/tailscale-utils.log", "{$timestamp} {$filename}: {$message}" . PHP_EOL, FILE_APPEND);
 }
 
+function run_command($command, $alwaysShow = false)
+{
+    $output = null;
+    $retval = null;
+    logmsg($command);
+    exec("{$command} 2>&1", $output, $retval);
+    if (($retval != 0) || $alwaysShow) {
+        logmsg("Command returned {$retval}" . PHP_EOL . implode(PHP_EOL, $output));
+    }
+}
+
 $plugin = "tailscale";
 $ifname = 'tailscale1';
 

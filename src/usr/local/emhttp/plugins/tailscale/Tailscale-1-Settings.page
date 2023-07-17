@@ -38,7 +38,7 @@ Unraid services listen on Tailscale IP
 
 Enable IP Forwarding
 : <select name='SYSCTL_IP_FORWARD' size='1'>
-    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '', "No");?>
+    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '0', "No");?>
     <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '1', "Yes");?>
 </select>
 
@@ -66,9 +66,9 @@ Allow Usage Data Collection
 
 Accept Routes
 : <select name='ACCEPT_ROUTES' size='1'>
-    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '', "Ignore");?>
-    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '1', "Yes");?>
     <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '0', "No");?>
+    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '1', "Yes");?>
+    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '2', "Ignore");?>
 </select>
 
 > Accept routes from the tailnet.
@@ -76,9 +76,9 @@ Accept Routes
 
 Accept DNS
 : <select name='ACCEPT_DNS' size='1'>
-    <?= mk_option($tailscale_config['ACCEPT_DNS'], '', "Ignore");?>
-    <?= mk_option($tailscale_config['ACCEPT_DNS'], '1', "Yes");?>
     <?= mk_option($tailscale_config['ACCEPT_DNS'], '0', "No");?>
+    <?= mk_option($tailscale_config['ACCEPT_DNS'], '1', "Yes");?>
+    <?= mk_option($tailscale_config['ACCEPT_DNS'], '2', "Ignore");?>
 </select>
 
 > Accept DNS from the tailnet.

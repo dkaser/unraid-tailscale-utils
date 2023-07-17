@@ -14,5 +14,9 @@
     "ACCEPT_ROUTES": {
 		"default": "0",
 		"description": "Use routes from the tailnet"
+	},
+    "SYSCTL_IP_FORWARD": {
+		"default": "0",
+		"description": "Enable IP forwarding in sysctl"
 	}
 }
