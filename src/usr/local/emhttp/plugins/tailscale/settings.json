@@ -6,5 +6,13 @@
     "USAGE": {
 		"default": "1",
 		"description": "Allow collection of usage data"
+	},
+    "ACCEPT_DNS": {
+		"default": "0",
+		"description": "Use MagicDNS"
+	},
+    "ACCEPT_ROUTES": {
+		"default": "0",
+		"description": "Use routes from the tailnet"
 	}
 }
