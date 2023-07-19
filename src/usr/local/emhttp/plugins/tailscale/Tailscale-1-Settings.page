@@ -64,7 +64,7 @@ Allow Usage Data Collection
 
 ### Tailscale Settings
 
-Accept Routes
+Use Tailscale Subnets
 : <select name='ACCEPT_ROUTES' size='1'>
     <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '0', "No");?>
     <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '1', "Yes");?>
@@ -74,7 +74,7 @@ Accept Routes
 > Accept routes from the tailnet.
 > If set to "Ignore", the plugin will not modify the setting.
 
-Accept DNS
+Use Tailscale DNS Settings
 : <select name='ACCEPT_DNS' size='1'>
     <?= mk_option($tailscale_config['ACCEPT_DNS'], '0', "No");?>
     <?= mk_option($tailscale_config['ACCEPT_DNS'], '1', "Yes");?>
@@ -84,14 +84,14 @@ Accept DNS
 > Accept DNS from the tailnet.
 > If set to "Ignore", the plugin will not modify the setting.
 
-Enable SSH
+Use Tailscale SSH
 : <select name='SSH' size='1'>
     <?= mk_option($tailscale_config['SSH'], '0', "No");?>
     <?= mk_option($tailscale_config['SSH'], '1', "Yes");?>
     <?= mk_option($tailscale_config['SSH'], '2', "Ignore");?>
 </select>
 
-> Enable SSH access in Tailscale Admin Console
+> Use Tailscale policy for SSH connections via Tailscale.
 > If set to "Ignore", the plugin will not modify the setting.
 
 

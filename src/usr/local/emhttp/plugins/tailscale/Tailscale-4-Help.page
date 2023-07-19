@@ -16,6 +16,11 @@ console).
 
 ## System Settings
 
+### Unraid services listen on Tailscale IP
+
+Configures Unraid services (SSH, WebGUI, SMB, etc.) to listen on Tailscale 
+addresses.
+
 ### Enable IP Forwarding
 
 This setting modifies the sysctl settings for IPv4 and IPv6 forwarding.
@@ -33,23 +38,48 @@ Taildrop.
 If this setting is configured, Tailscale will be restarted when the array
 starts; this is required for the Taildrop folder to be detected and used.
 
+### Allow Usage Data Collection
+
+Allows usage information to be collected:
+
+- Anonymized identifier
+- Tailscale plugin version
+- Unraid version
+
 ## Tailscale Settings
 
-### Accept Routes
+If a setting is set to "Ignore", the plugin will not make any changes to the 
+setting in Tailscale. This is useful if you wish to configure settings via 
+CLI instead of the WebGUI.
 
-This setting modifies the Tailscale --accept-routes setting.
+### Use Tailscale Subnets
 
-When set to Yes, --accept-routes is set to True.
-When set to No, --accept-routes is set to False.
-When set to Ignore, the plugin does not modify --accept-routes. (Useful if you prefer to configure the setting via CLI).
+When enabled, Unraid will accept routes advertisted from subnet routers in the 
+tailnet.
 
-### Accept DNS
+When disabled, Unraid will not accept routes from subnet routers.
 
-This setting modifies the Tailscale --accept-dns setting.
+### Use Tailscale DNS Settings
 
-When set to Yes, --accept-dns is set to True.
-When set to No, --accept-dns is set to False.
-When set to Ignore, the plugin does not modify --accept-dns. (Useful if you prefer to configure the setting via CLI).
+When enabled, Unraid will use the DNS settings configured in the Tailscale 
+admin console, including MagicDNS and nameservers.
+
+When disabled, Unraid will use the DNS settings configured in the Unraid 
+network settings.
+
+Refer to [https://tailscale.com/kb/1054/dns/](https://tailscale.com/kb/1054/dns/)
+for more information on Tailscale DNS configuration.
+
+### Use Tailscale SSH
+
+When enabled, the Tailscale policy is used to manage access to SSH via 
+Tailscale.
+
+When disabled, the built-in Unraid SSH server manages connections via 
+Tailscale.
+
+Refer to [https://tailscale.com/kb/1193/tailscale-ssh/](https://tailscale.com/kb/1193/tailscale-ssh/) 
+for more information on Tailscale SSH.
 
 ## Certificates
 
