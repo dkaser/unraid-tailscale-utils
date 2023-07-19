@@ -1,26 +1,26 @@
 {
-	"INCLUDE_INTERFACE": {
-		"default": "1",
-		"description": "Adds tailscale interface to Unraid services"
-	},
-    "USAGE": {
-		"default": "1",
-		"description": "Allow collection of usage data"
-	},
-    "ACCEPT_DNS": {
-		"default": "0",
-		"description": "Use MagicDNS"
-	},
-    "ACCEPT_ROUTES": {
-		"default": "0",
-		"description": "Use routes from the tailnet"
-	},
-	"SSH": {
-		"default": "0",
-		"description": "Enable SSH in Tailscale Admin Console"
-	},
-    "SYSCTL_IP_FORWARD": {
-		"default": "0",
-		"description": "Enable IP forwarding in sysctl"
-	}
+  "INCLUDE_INTERFACE": {
+    "default": "1",
+    "description": "Adds tailscale interface to Unraid services"
+  },
+  "USAGE": {
+    "default": "1",
+    "description": "Allow collection of usage data"
+  },
+  "ACCEPT_DNS": {
+    "default": "0",
+    "description": "Use MagicDNS"
+  },
+  "ACCEPT_ROUTES": {
+    "default": "0",
+    "description": "Use routes from the tailnet"
+  },
+  "SSH": {
+    "default": "0",
+    "description": "Enable SSH in Tailscale Admin Console"
+  },
+  "SYSCTL_IP_FORWARD": {
+    "default": "0",
+    "description": "Enable IP forwarding in sysctl"
+  }
 }

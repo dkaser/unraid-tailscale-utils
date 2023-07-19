@@ -1,34 +1,21 @@
 <?php
 
-switch ($tailscale_config['ACCEPT_ROUTES']) {
-    case "0":
-        run_command("/usr/local/sbin/tailscale set --accept-routes=false");
-        break;
-    case "1":
-        run_command("/usr/local/sbin/tailscale set --accept-routes=true");
-        break;
-    default:
-        logmsg("Ignoring accept-routes");
+function apply_flag($setting, $flag)
+{
+    global $tailscale_config;
+
+    switch ($tailscale_config[$setting]) {
+        case "0":
+            run_command("/usr/local/sbin/tailscale set {$flag}=false");
+            break;
+        case "1":
+            run_command("/usr/local/sbin/tailscale set {$flag}=true");
+            break;
+        default:
+            logmsg("Ignoring {$flag}");
+    }
 }
 
-switch ($tailscale_config['ACCEPT_DNS']) {
-    case "0":
-        run_command("/usr/local/sbin/tailscale set --accept-dns=false");
-        break;
-    case "1":
-        run_command("/usr/local/sbin/tailscale set --accept-dns=true");
-        break;
-    default:
-        logmsg("Ignoring accept-dns");
-}
-
-switch ($tailscale_config['SSH']) {
-    case "0":
-        run_command("/usr/local/sbin/tailscale set --ssh=false");
-        break;
-    case "1":
-        run_command("/usr/local/sbin/tailscale set --ssh=true");
-        break;
-    default:
-        logmsg("Ignoring ssh");
-}
+apply_flag('ACCEPT_ROUTES', '--accept-routes');
+apply_flag('ACCEPT_DNS', '--accept-dns');
+apply_flag('SSH', '--ssh');
