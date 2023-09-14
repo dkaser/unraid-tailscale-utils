@@ -12,7 +12,7 @@ foreach ($_SERVER as $key => $value) {
 }
 putenv("UNRAID_CSRF_TOKEN={$csrftoken}");
 
-$cmd            = "tailscale --socket=/var/run/tailscale/tailscaled.sock web -cgi";
+$cmd            = "tailscale --socket=/var/run/tailscale/tailscaled.sock web -cgi -prefix=/plugins/tailscale/interface.php/";
 $descriptorspec = array(
     0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
     1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
@@ -30,9 +30,16 @@ if (is_resource($process)) {
     $return_value = proc_close($process);
 }
 
-$out = explode(PHP_EOL, $output);
-$out = array_slice($out, 2);
-
+$out     = explode(PHP_EOL, $output);
+$headers = true;
 foreach ($out as $line) {
-    echo($line . PHP_EOL);
+    if ($headers) {
+        if (trim($line) == "") {
+            $headers = false;
+            continue;
+        }
+        header($line);
+    } else {
+        echo($line . PHP_EOL);
+    }
 }
