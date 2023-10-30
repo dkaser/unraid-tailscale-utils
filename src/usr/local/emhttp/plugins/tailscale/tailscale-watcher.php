@@ -4,7 +4,7 @@
 $docroot = $docroot ?? $_SERVER['DOCUMENT_ROOT'] ?: '/usr/local/emhttp';
 require_once "{$docroot}/plugins/tailscale/include/common.php";
 
-$timer           = 60;
+$timer           = 15;
 $saved_addresses = array();
 
 logmsg("Starting tailscale-watcher");
@@ -19,6 +19,7 @@ while (true) {
         foreach ($interfaces["tailscale1"]["unicast"] as $interface) {
             if (isset($interface["address"])) {
                 $new_addresses[] = $interface["address"];
+                $timer = 60;
             }
         }
     }
