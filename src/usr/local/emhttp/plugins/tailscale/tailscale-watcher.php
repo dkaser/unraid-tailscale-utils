@@ -19,7 +19,7 @@ while (true) {
         foreach ($interfaces["tailscale1"]["unicast"] as $interface) {
             if (isset($interface["address"])) {
                 $new_addresses[] = $interface["address"];
-                $timer = 60;
+                $timer           = 60;
             }
         }
     }
@@ -32,7 +32,7 @@ while (true) {
             try {
                 require $file;
             } catch (Exception $e) {
-                logmsg("Caught exception in $file : " . $e->getMessage());
+                logmsg("Caught exception in {$file} : " . $e->getMessage());
             }
         }
     }
@@ -41,7 +41,7 @@ while (true) {
         try {
             require $file;
         } catch (Exception $e) {
-            logmsg("Caught exception in $file : " . $e->getMessage());
+            logmsg("Caught exception in {$file} : " . $e->getMessage());
         }
     }
 }
