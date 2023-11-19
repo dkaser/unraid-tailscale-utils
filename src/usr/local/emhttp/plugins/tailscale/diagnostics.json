@@ -35,6 +35,14 @@
         {
             "command": "docker network inspect host",
             "file": "docker-network-host.txt"
+        },
+        {
+            "command": "ip rule",
+            "file": "ip-rule.txt"
+        },
+        {
+            "command": "ip route list table 52",
+            "file": "ip-route-tailscale.txt"
         }
     ],
     "files": [
