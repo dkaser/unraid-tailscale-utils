@@ -29,7 +29,19 @@ while (true) {
         $saved_addresses = $new_addresses;
 
         foreach (glob("{$docroot}/plugins/tailscale/include/tailscale-watcher/*.php") as $file) {
-            require_once $file;
+            try {
+                require $file;
+            } catch (Exception $e) {
+                logmsg("Caught exception in $file : " . $e->getMessage());
+            }
+        }
+    }
+
+    foreach (glob("{$docroot}/plugins/tailscale/include/tailscale-watcher/always/*.php") as $file) {
+        try {
+            require $file;
+        } catch (Exception $e) {
+            logmsg("Caught exception in $file : " . $e->getMessage());
         }
     }
 }
