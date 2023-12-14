@@ -20,4 +20,4 @@ if (strpos($nginx, $original) !== false) {
     file_put_contents("/etc/rc.d/rc.nginx", $newFile);
 }
 
-exec("/etc/rc.d/rc.nginx reload");
+exec("/etc/rc.d/rc.nginx reload 2>&1");
