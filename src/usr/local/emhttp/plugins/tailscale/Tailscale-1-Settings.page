@@ -100,6 +100,11 @@ Use Tailscale SSH
 > Use Tailscale policy for SSH connections via Tailscale.
 > If set to "Ignore", the plugin will not modify the setting.
 
+Wireguard Port
+: <input type="number" name="WG_PORT" class="narrow" min="1" max="65535" value="<?=$tailscale_config['WG_PORT']?>" placeholder="41641">
+
+> Change the port used for Wireguard conections.
+> This usually does not need to be changed.
 
 ### Save Settings
 

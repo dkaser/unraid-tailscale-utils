@@ -3,11 +3,18 @@
 
 . /usr/local/emhttp/plugins/tailscale/log.sh
 
+if [ -f /usr/local/emhttp/plugins/tailscale/custom-params.sh ]; then
+    . /usr/local/emhttp/plugins/tailscale/custom-params.sh
+else
+    TAILSCALE_CUSTOM_PARAMS=""
+fi
+
 start_tailscaled() {
   if ! /usr/bin/pgrep --ns $$ --euid root -f "^/usr/local/sbin/tailscaled" 1> /dev/null 2> /dev/null ; then
-    log "Starting tailscaled: /usr/local/sbin/tailscaled"
+    TAILSCALE_START_CMD="/usr/local/sbin/tailscaled -statedir /boot/config/plugins/tailscale/state -tun tailscale1 $TAILSCALE_CUSTOM_PARAMS"
+    log "Starting tailscaled: $TAILSCALE_START_CMD"
     mkdir -p /boot/config/plugins/tailscale/state
-    /usr/local/sbin/tailscaled -statedir /boot/config/plugins/tailscale/state -tun tailscale1 >> /var/log/tailscale.log 2>&1  &
+    $TAILSCALE_START_CMD >> /var/log/tailscale.log 2>&1  &
     nohup /usr/local/emhttp/plugins/tailscale/tailscale-watcher.php 1>/dev/null 2>&1 &
   fi
 }

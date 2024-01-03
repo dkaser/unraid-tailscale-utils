@@ -26,5 +26,9 @@
   "ENABLE_TAILSCALE": {
     "default": "1",
     "description": "Tailscale enabled"
+  },
+  "WG_PORT": {
+    "default": "41641",
+    "description": "Port for Wireguard connections"
   }
 }
