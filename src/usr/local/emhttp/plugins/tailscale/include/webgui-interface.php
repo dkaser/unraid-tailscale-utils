@@ -12,6 +12,8 @@ $tailscale_status = getTailscaleStatus();
 $tailscale_prefs  = getTailscalePrefs();
 $tailscale_lock   = getTailscaleLock();
 
+$tailscale_dashboard = getDashboardInfo($tailscale_status);
+
 $tailscale_output['key_expiry_warning'] = getKeyExpirationWarning($tailscale_status);
 $tailscale_output['status_info']        = getStatusInfo($tailscale_status, $tailscale_prefs, $tailscale_lock);
 $tailscale_output['connection_info']    = getConnectionInfo($tailscale_status, $tailscale_prefs);

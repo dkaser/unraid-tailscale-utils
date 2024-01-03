@@ -5,6 +5,11 @@ function printRow($title, $value)
     return "<tr><td>{$title}</td><td>{$value}</td></tr>" . PHP_EOL;
 }
 
+function printDash($title, $value)
+{
+    return "<tr><td><span class='w26'>{$title}</span>{$value}</td></tr>" . PHP_EOL;
+}
+
 function getStatusInfo($status, $prefs, $lock)
 {
     $tsVersion     = isset($status->Version) ? $status->Version : "Unknown";
@@ -59,6 +64,22 @@ function getConnectionInfo($status, $prefs)
     $output .= printRow("Advertised Routes", $advertisedRoutes);
     $output .= printRow("Accept Routes", $acceptRoutes);
     $output .= printRow("Accept DNS", $acceptDNS);
+
+    return $output;
+}
+
+function getDashboardInfo($status)
+{
+    $hostName     = isset($status->Self->HostName) ? $status->Self->HostName : "Unknown";
+    $dnsName      = isset($status->Self->DNSName) ? $status->Self->DNSName : "Unknown";
+    $tailscaleIPs = isset($status->TailscaleIPs) ? implode("<br /><span class='w26'>&nbsp;</span>", $status->TailscaleIPs) : "Unknown";
+    $online       = isset($status->Self->Online) ? ($status->Self->Online ? "Yes" : "No") : "Unknown";
+
+    $output = "";
+    $output .= printDash("Online", $online);
+    $output .= printDash("Hostname", $hostName);
+    $output .= printDash("DNS Name", $dnsName);
+    $output .= printDash("Tailscale IPs", $tailscaleIPs);
 
     return $output;
 }
