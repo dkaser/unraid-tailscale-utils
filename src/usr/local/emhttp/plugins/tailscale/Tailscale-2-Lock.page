@@ -5,20 +5,25 @@ Type="xmenu"
 Tag="lock"
 ---
 <?php
-$signingNode = false;
 
-switch (true) {
-    case $tailscale_output['lock_signing']:
-        require "{$docroot}/plugins/tailscale/include/tailscale-lock/signing.php";
-        break;
-    case $tailscale_output['lock_signed']:
-        require "{$docroot}/plugins/tailscale/include/tailscale-lock/signed.php";
-        break;
-    case $tailscale_output['lock_enabled']:
-        require "{$docroot}/plugins/tailscale/include/tailscale-lock/locked.php";
-        break;
-    default:
-        require "{$docroot}/plugins/tailscale/include/tailscale-lock/disabled.php";
-        break;
-}
-?>
+if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
+
+    $signingNode = false;
+
+    switch (true) {
+        case $tailscale_output['lock_signing']:
+            require "{$docroot}/plugins/tailscale/include/tailscale-lock/signing.php";
+            break;
+        case $tailscale_output['lock_signed']:
+            require "{$docroot}/plugins/tailscale/include/tailscale-lock/signed.php";
+            break;
+        case $tailscale_output['lock_enabled']:
+            require "{$docroot}/plugins/tailscale/include/tailscale-lock/locked.php";
+            break;
+        default:
+            require "{$docroot}/plugins/tailscale/include/tailscale-lock/disabled.php";
+            break;
+    }
+} else { ?>
+Tailscale is currently disabled. It can be enabled via the Settings tab.
+<?php } ?>

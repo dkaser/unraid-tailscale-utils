@@ -4,6 +4,9 @@ Title="Info"
 Tag="info"
 Type="xmenu"
 ---
+<?php
+if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
+?>
 <table class="share_status">
     <thead>
         <tr>
@@ -24,3 +27,6 @@ Type="xmenu"
         <?= $tailscale_output['connection_info']; ?>
     </tbody>
 </table>
+<?php } else { ?>
+Tailscale is currently disabled. It can be enabled via the Settings tab.
+<?php } ?>

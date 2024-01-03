@@ -27,6 +27,12 @@ Tag="gears"
 
 ### System Settings
 
+Tailscale Enabled
+: <select name='ENABLE_TAILSCALE' size='1'>
+    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '1', "Yes");?>
+    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '0', "No");?>
+</select>
+
 Unraid services listen on Tailscale IP
 : <select name='INCLUDE_INTERFACE' size='1'>
     <?= mk_option($tailscale_config["INCLUDE_INTERFACE"], '1', "Yes");?>

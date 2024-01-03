@@ -13,3 +13,10 @@ foreach (glob("{$docroot}/plugins/tailscale/include/pre-startup/*.php") as $file
     logmsg("Executing {$file}");
     require_once $file;
 }
+
+if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
+    run_command('/etc/rc.d/rc.tailscale restart');
+} else {
+    run_command('/etc/rc.d/rc.tailscale stop');
+    run_command($restart_command);
+}

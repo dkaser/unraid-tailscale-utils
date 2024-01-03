@@ -15,9 +15,6 @@ if [ -f $TS_PLUGIN_CONFIG ]; then
     source $TS_PLUGIN_CONFIG
 fi
 
-log "Running pre-startup script"
-$TS_PLUGIN_ROOT/pre-startup.php
-
 if [[ $TAILDROP_DIR && -d "$TAILDROP_DIR" && -x "$TAILDROP_DIR" ]]; then
     log "Configuring Taildrop link"
 
@@ -28,4 +25,6 @@ if [[ $TAILDROP_DIR && -d "$TAILDROP_DIR" && -x "$TAILDROP_DIR" ]]; then
     ln -sfn "$TAILDROP_DIR" /var/lib/tailscale/Taildrop
 fi
 
-/etc/rc.d/rc.tailscale restart
+log "Running pre-startup script"
+$TS_PLUGIN_ROOT/pre-startup.php
+

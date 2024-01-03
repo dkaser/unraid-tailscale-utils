@@ -22,5 +22,9 @@
   "SYSCTL_IP_FORWARD": {
     "default": "0",
     "description": "Enable IP forwarding in sysctl"
+  },
+  "ENABLE_TAILSCALE": {
+    "default": "1",
+    "description": "Tailscale enabled"
   }
 }
