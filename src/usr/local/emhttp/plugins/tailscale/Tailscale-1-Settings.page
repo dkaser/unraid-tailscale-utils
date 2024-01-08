@@ -17,8 +17,11 @@ Tag="gears"
         z-index: 100;
         display: none
     }
+    .advanced{display:none}
 </style>
 <link type="text/css" rel="stylesheet" href="<?autov('/webGui/styles/jquery.filetree.css')?>">
+<link type="text/css" rel="stylesheet" href="<?autov('/webGui/styles/jquery.switchbutton.css')?>">
+<span class="status vhshift"><input type="checkbox" class="advancedview"></span>
 <form markdown="1" method="POST" action="/update.php" target="progressFrame">
 <input type="hidden" name="#file"
     value="<?= $plugin; ?>/<?= $plugin; ?>.cfg" />
@@ -27,6 +30,7 @@ Tag="gears"
 
 ### System Settings
 
+<div class="advanced" markdown="1">
 Tailscale Enabled
 : <select name='ENABLE_TAILSCALE' size='1'>
     <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '1', "Yes");?>
@@ -44,12 +48,13 @@ Unraid services listen on Tailscale IP
 
 Enable IP Forwarding
 : <select name='SYSCTL_IP_FORWARD' size='1'>
-    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '0', "No");?>
     <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '1', "Yes");?>
+    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '0', "No");?>
 </select>
 
 > Sets net.ipv4.ip_forward = 1 and net.ipv6.conf.all.forwarding = 1 in sysctl.
 > This change occurs immediately when being enabled.
+</div>
 
 Taildrop Location
 : <input type="text" id="taildropdir" name="TAILDROP_DIR" autocomplete="off" spellcheck="false"
@@ -68,7 +73,32 @@ Allow Usage Data Collection
 > Allows collection of usage data for the Tailscale plugin.
 > This sends an anonymized identifier and the current version of the plugin.
 
-### Tailscale Settings
+### Tailscale Services
+
+Use Tailscale SSH
+: <select name='SSH' size='1'>
+    <?= mk_option($tailscale_config['SSH'], '0', "No");?>
+    <?= mk_option($tailscale_config['SSH'], '1', "Yes");?>
+    <?= mk_option($tailscale_config['SSH'], '2', "Ignore");?>
+</select>
+
+> Use Tailscale policy for SSH connections via Tailscale.
+> If set to "Ignore", the plugin will not modify the setting.
+
+<div class="advanced" markdown="1">
+Wireguard Port
+: <input type="number" name="WG_PORT" class="narrow" min="1" max="65535" value="<?=$tailscale_config['WG_PORT']?>" placeholder="41641">
+
+> Change the port used for Wireguard conections.
+> This usually does not need to be changed.
+
+### Tailscale Outbound Networking
+
+_These settings only apply to outbound network traffic from Unraid or running containers._
+
+_They do not affect advertised routes, exit nodes, or the ability to access Unraid via MagicDNS._
+
+***These should generally be left off unless specifically needed.***
 
 Use Tailscale Subnets
 : <select name='ACCEPT_ROUTES' size='1'>
@@ -89,23 +119,7 @@ Use Tailscale DNS Settings
 
 > Accept DNS from the tailnet.
 > If set to "Ignore", the plugin will not modify the setting.
-
-Use Tailscale SSH
-: <select name='SSH' size='1'>
-    <?= mk_option($tailscale_config['SSH'], '0', "No");?>
-    <?= mk_option($tailscale_config['SSH'], '1', "Yes");?>
-    <?= mk_option($tailscale_config['SSH'], '2', "Ignore");?>
-</select>
-
-> Use Tailscale policy for SSH connections via Tailscale.
-> If set to "Ignore", the plugin will not modify the setting.
-
-Wireguard Port
-: <input type="number" name="WG_PORT" class="narrow" min="1" max="65535" value="<?=$tailscale_config['WG_PORT']?>" placeholder="41641">
-
-> Change the port used for Wireguard conections.
-> This usually does not need to be changed.
-
+</div>
 ### Save Settings
 
 **Tailscale will be restarted when changes are applied.**
@@ -120,9 +134,35 @@ Restart the Tailscale daemon and reapply settings.
 : <input type="submit" value="Restart">
 </form>
 
+### Plugin Diagnostics
+
+<form markdown="1" method="GET" action="/plugins/plugin-diagnostics/download.php" target="_blank">
+<input type="hidden" name="plugin" value="tailscale" />
+Download diagnostics (this may take some time to complete).
+: <input type="submit" value="Download">
+</form>
+
 <script src="<?autov('/webGui/javascript/jquery.filetree.js')?>" charset="utf-8"></script>
+<script src="<?autov('/webGui/javascript/jquery.switchbutton.js')?>"></script>
 <script>
     $(function() {
         <?= $tailscale_output['attach_file_tree']; ?>
+
+        if ($.cookie('tailscale_view_mode') == 'advanced') {
+            $('.advanced').show();
+            $('.basic').hide();
+        }
+
+        $('.advancedview').switchButton({
+            labels_placement: "left",
+            on_label: "_(Advanced View)_",
+            off_label: "_(Basic View)_",
+            checked: $.cookie('tailscale_view_mode') == 'advanced'
+        });
+        $('.advancedview').change(function(){
+            $('.advanced').toggle('slow');
+            $('.basic').toggle('slow');
+            $.cookie('tailscale_view_mode', $('.advancedview').is(':checked') ? 'advanced' : 'basic', {expires:3650});
+        });
     });
 </script>
