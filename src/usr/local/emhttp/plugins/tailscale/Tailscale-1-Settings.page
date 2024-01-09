@@ -142,8 +142,25 @@ Download diagnostics (this may take some time to complete).
 : <input type="submit" value="Download">
 </form>
 
+<div class="advanced" markdown="1">
+### Reset Tailscale
+
+<form markdown="1" method="POST" action="/update.php" target="progressFrame">
+<input type="hidden" name="#command" value="/usr/local/emhttp/plugins/tailscale/erase.sh" />
+Erase the Tailscale configuration.
+: <input type="button" value="Erase" onclick="requestErase(this)"><input id="tailscale_erase_confirm" type="submit" value="Confirm" style="display: none;">
+</form>
+</div>
+
 <script src="<?autov('/webGui/javascript/jquery.filetree.js')?>" charset="utf-8"></script>
 <script src="<?autov('/webGui/javascript/jquery.switchbutton.js')?>"></script>
+<script>
+    function requestErase(e) {
+        e.disabled = true;
+        var confirmButton = document.getElementById('tailscale_erase_confirm');
+        confirmButton.style.display = "inline";
+    }
+</script>
 <script>
     $(function() {
         <?= $tailscale_output['attach_file_tree']; ?>
