@@ -25,5 +25,5 @@ if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
             break;
     }
 } else { ?>
-Tailscale is currently disabled. It can be enabled via the Settings tab.
+_(Tailscale is currently disabled - it can be enabled via the Settings tab.)_
 <?php } ?>

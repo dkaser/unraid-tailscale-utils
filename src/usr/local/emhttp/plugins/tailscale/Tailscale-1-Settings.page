@@ -31,124 +31,126 @@ Tag="gears"
 ### System Settings
 
 <div class="advanced" markdown="1">
-Tailscale Enabled
+_(Enable Tailscale)_
 : <select name='ENABLE_TAILSCALE' size='1'>
-    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '1', "Yes");?>
-    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '0', "No");?>
+    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config["ENABLE_TAILSCALE"], '0', _("No"));?>
 </select>
 
-Unraid services listen on Tailscale IP
+> <?= $_SESSION['locale'] ?>
+> _(Enable Tailscale)_
+
+_(Unraid services listen on Tailscale IP)_
 : <select name='INCLUDE_INTERFACE' size='1'>
-    <?= mk_option($tailscale_config["INCLUDE_INTERFACE"], '1', "Yes");?>
-    <?= mk_option($tailscale_config["INCLUDE_INTERFACE"], '0', "No");?>
+    <?= mk_option($tailscale_config["INCLUDE_INTERFACE"], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config["INCLUDE_INTERFACE"], '0', _("No"));?>
 </select>
 
-> Adds the tailscale interface to the Unraid 'extra interfaces' setting.
-> This allows services such as the Web GUI and SSH to be accessed via the Tailscale IP.
+> _(Adds the Tailscale interface to the Unraid 'extra interfaces' setting.)_
+> _(This allows services such as the Web GUI and SSH to be accessed via the Tailscale IP.)_
 
-Enable IP Forwarding
+_(Enable IP Forwarding)_
 : <select name='SYSCTL_IP_FORWARD' size='1'>
-    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '1', "Yes");?>
-    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '0', "No");?>
+    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config['SYSCTL_IP_FORWARD'], '0', _("No"));?>
 </select>
 
-> Sets net.ipv4.ip_forward = 1 and net.ipv6.conf.all.forwarding = 1 in sysctl.
-> This change occurs immediately when being enabled.
+> _(Sets net.ipv4.ip_forward and net.ipv6.conf.all.forwarding to 1 in sysctl.)_
+> _(This change occurs immediately when being enabled.)_
 </div>
 
-Taildrop Location
+_(Taildrop Location)_
 : <input type="text" id="taildropdir" name="TAILDROP_DIR" autocomplete="off" spellcheck="false"
     data-pickfolders="true" data-pickfilter="HIDE_FILES_FILTER" data-pickroot="/mnt" pattern="^[^\\]*/$"
     value="<?= htmlspecialchars($tailscale_config['TAILDROP_DIR']);?>">
 
-> Specify the path for incoming Taildrop files.
-> If Taildrop is configured, Tailscale will be automatically restarted when the array starts or stops.
+> _(Specify the path for incoming Taildrop files.)_
 
-Allow Usage Data Collection
+_(Allow Usage Data Collection)_
 : <select name='USAGE' size='1'>
-    <?= mk_option($tailscale_config["USAGE"], '1', "Yes");?>
-    <?= mk_option($tailscale_config["USAGE"], '0', "No");?>
+    <?= mk_option($tailscale_config["USAGE"], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config["USAGE"], '0', _("No"));?>
 </select>
 
-> Allows collection of usage data for the Tailscale plugin.
-> This sends an anonymized identifier and the current version of the plugin.
+> _(Allows collection of usage data for the Tailscale plugin)_.
+> _(This sends an anonymized identifier and the current version of the plugin)_.
 
-### Tailscale Services
+### _(Tailscale Services)_
 
-Use Tailscale SSH
+_(Use Tailscale SSH)_
 : <select name='SSH' size='1'>
-    <?= mk_option($tailscale_config['SSH'], '0', "No");?>
-    <?= mk_option($tailscale_config['SSH'], '1', "Yes");?>
-    <?= mk_option($tailscale_config['SSH'], '2', "Ignore");?>
+    <?= mk_option($tailscale_config['SSH'], '0', _("No"));?>
+    <?= mk_option($tailscale_config['SSH'], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config['SSH'], '2', _("Ignore"));?>
 </select>
 
-> Use Tailscale policy for SSH connections via Tailscale.
-> If set to "Ignore", the plugin will not modify the setting.
+> _(Use Tailscale policy for SSH connections via Tailscale.)_
+> _(If set to Ignore, the plugin will not modify the setting.)_
 
 <div class="advanced" markdown="1">
-Wireguard Port
+_(Wireguard Port)_
 : <input type="number" name="WG_PORT" class="narrow" min="1" max="65535" value="<?=$tailscale_config['WG_PORT']?>" placeholder="41641">
 
-> Change the port used for Wireguard conections.
-> This usually does not need to be changed.
+> _(Change the port used for Wireguard conections.)_
+> _(This usually does not need to be changed.)_
 
-### Tailscale Outbound Networking
+### _(Tailscale Outbound Networking)_
 
-_These settings only apply to outbound network traffic from Unraid or running containers._
+#### _(These settings only apply to outbound network traffic from Unraid or running containers.)_
 
-_They do not affect advertised routes, exit nodes, or the ability to access Unraid via MagicDNS._
+#### _(They do not affect advertised routes, exit nodes, or the ability to access Unraid via MagicDNS.)_
 
-***These should generally be left off unless specifically needed.***
+#### _(These should generally be left off unless specifically needed.)_
 
-Use Tailscale Subnets
+_(Use Tailscale Subnets)_
 : <select name='ACCEPT_ROUTES' size='1'>
-    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '0', "No");?>
-    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '1', "Yes");?>
-    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '2', "Ignore");?>
+    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '0', _("No"));?>
+    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config['ACCEPT_ROUTES'], '2', _("Ignore"));?>
 </select>
 
-> Accept routes from the tailnet.
-> If set to "Ignore", the plugin will not modify the setting.
+> _(Accept routes from the tailnet.)_
+> _(If set to _("Ignore"), the plugin will not modify the setting.)_
 
-Use Tailscale DNS Settings
+_(Use Tailscale DNS settings)_
 : <select name='ACCEPT_DNS' size='1'>
-    <?= mk_option($tailscale_config['ACCEPT_DNS'], '0', "No");?>
-    <?= mk_option($tailscale_config['ACCEPT_DNS'], '1', "Yes");?>
-    <?= mk_option($tailscale_config['ACCEPT_DNS'], '2', "Ignore");?>
+    <?= mk_option($tailscale_config['ACCEPT_DNS'], '0', _("No"));?>
+    <?= mk_option($tailscale_config['ACCEPT_DNS'], '1', _("Yes"));?>
+    <?= mk_option($tailscale_config['ACCEPT_DNS'], '2', _("Ignore"));?>
 </select>
 
-> Accept DNS from the tailnet.
-> If set to "Ignore", the plugin will not modify the setting.
+> _(Accept DNS from the tailnet.)_
+> _(If set to Ignore, the plugin will not modify the setting.)_
 </div>
-### Save Settings
+### _(Save Settings)_
 
 **Tailscale will be restarted when changes are applied.**
-: <input type="submit" name="#apply" value="Apply"><input type="button" id="DONE" value="Done" onclick="done()">
+: <input type="submit" name="#apply" value="Apply"><input type="button" id="DONE" value="<?= _('Done') ?>" onclick="done()">
 </form>
 
-### Restart Tailscale
+### _(Restart Tailscale)_
 
 <form markdown="1" method="POST" action="/update.php" target="progressFrame">
 <input type="hidden" name="#command" value="/usr/local/emhttp/plugins/tailscale/restart.sh" />
-Restart the Tailscale daemon and reapply settings.
-: <input type="submit" value="Restart">
+_(Restart the Tailscale daemon and reapply settings.)_
+: <input type="submit" value="<?= _('Restart') ?>">
 </form>
 
-### Plugin Diagnostics
+### _(Plugin Diagnostics)_
 
 <form markdown="1" method="GET" action="/plugins/plugin-diagnostics/download.php" target="_blank">
 <input type="hidden" name="plugin" value="tailscale" />
-Download diagnostics (this may take some time to complete).
-: <input type="submit" value="Download">
+_(Download diagnostics (this may take some time to complete))_
+: <input type="submit" value="<?= _('Download') ?> ">
 </form>
 
 <div class="advanced" markdown="1">
-### Reset Tailscale
+### _(Reset Tailscale)_
 
 <form markdown="1" method="POST" action="/update.php" target="progressFrame">
 <input type="hidden" name="#command" value="/usr/local/emhttp/plugins/tailscale/erase.sh" />
-Erase the Tailscale configuration.
-: <input type="button" value="Erase" onclick="requestErase(this)"><input id="tailscale_erase_confirm" type="submit" value="Confirm" style="display: none;">
+_(Erase the Tailscale configuration)_
+: <input type="button" value="<?= _('Erase') ?>" onclick="requestErase(this)"><input id="tailscale_erase_confirm" type="submit" value="<?= _('Confirm') ?>" style="display: none;">
 </form>
 </div>
 

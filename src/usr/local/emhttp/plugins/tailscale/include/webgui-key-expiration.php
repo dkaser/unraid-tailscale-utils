@@ -22,7 +22,7 @@ function getKeyExpirationWarning($status)
                 break;
         }
 
-        return "<span class='{$priority}' style='text-align: center; font-size: 1.4em; font-weight: bold;'>The Tailscale key will expire in {$intervalPrint} days on {$expiryPrint}.</span>";
+        return "<span class='{$priority}' style='text-align: center; font-size: 1.4em; font-weight: bold;'>" . sprintf(_("The Tailscale key will expire in %s days on %s."), $intervalPrint, $expiryPrint) ."</span>";
     }
     return "";
 }

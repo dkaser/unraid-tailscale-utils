@@ -8,7 +8,7 @@ require_once "{$docroot}/plugins/tailscale/include/common.php";
 if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
     require_once "{$docroot}/plugins/tailscale/include/webgui-interface.php";
 } else {
-    $tailscale_dashboard = "<tr><td>Tailscale is currently disabled.</td></tr>";
+    $tailscale_dashboard = "<tr><td>" . _("Tailscale is currently disabled") . "</td></tr>";
 }
 
 $mytiles['tailscale']['column2'] =

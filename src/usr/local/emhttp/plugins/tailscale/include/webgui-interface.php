@@ -5,6 +5,7 @@ require_once "{$docroot}/plugins/tailscale/include/tailscale-status.php";
 require_once "{$docroot}/plugins/tailscale/include/webgui-info.php";
 require_once "{$docroot}/plugins/tailscale/include/webgui-key-expiration.php";
 require_once "{$docroot}/plugins/tailscale/include/tailscale-lock.php";
+require_once "{$docroot}/plugins/tailscale/include/netbios-check.php";
 
 $tailscale_output = array();
 
@@ -28,3 +29,5 @@ $tailscale_output['lock_pending'] = getTailscaleLockPending($tailscale_lock);
 $tailscale_output['lock_pubkey']  = getTailscaleLockPubkey($tailscale_lock);
 $tailscale_output['lock_nodekey'] = getTailscaleLockNodekey($tailscale_lock);
 $tailscale_output['lock_warning'] = getTailscaleLockWarning($tailscale_lock);
+
+$tailscale_output['netbios_warning'] = getTailscaleNetbiosWarning($var);
