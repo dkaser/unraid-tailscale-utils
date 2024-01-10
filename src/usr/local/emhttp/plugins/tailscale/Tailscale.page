@@ -21,6 +21,7 @@ if ($tailscale_config['ENABLE_TAILSCALE'] == "1") {
 ?>
 <?= $tailscale_output['lock_warning']; ?>
 <?= $tailscale_output['key_expiry_warning']; ?>
+<?= $tailscale_output['netbios_warning']; ?>
 <iframe src="/plugins/tailscale/interface.php" style="width:100%; height:600px; border: none;"></iframe>
 <?php } else { ?>
 Tailscale is currently disabled. It can be enabled via the Settings tab.
