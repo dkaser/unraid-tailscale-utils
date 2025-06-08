@@ -2,7 +2,13 @@
     "title": "Tailscale",
     "filters": [
         "s/\\.[^\\.]*\\.myunraid\\.net/\\.hash\\.myunraid\\.net/g",
-        "s/\\.[^\\.]*\\.ts\\.net/\\.magicdns\\.ts\\.net/g"
+        "s/\\.[^\\.]*\\.ts\\.net/\\.magicdns\\.ts\\.net/g",
+        "s/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/[email protected]/g",
+        "s/([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2}[:-]){3}([0-9A-Fa-f]{2})/\\1:XX:XX:XX:\\3/g",
+        "s/([0-9A-Fa-f]{1,4}):([0-9A-Fa-f]{1,4}:){1,}([0-9A-Fa-f]{1,4})(\\/[0-9]{1,3})?([%][a-zA-Z0-9]+)?/\\1:XX:XX:XX:XX:XX:XX:\\3\\4\\5/g",
+        "s/\\[([0-9A-Fa-f]{1,4}):([0-9A-Fa-f]{1,4}:){1,}([0-9A-Fa-f]{1,4})(\\/[0-9]{1,3})?([%][a-zA-Z0-9]+)?\\]/[\\1:XX:XX:XX:XX:XX:XX:\\3\\4\\5]/g",
+        "s/([0-9A-Fa-f]{1,4}):([0-9A-Fa-f]{1,4}:)?::([0-9A-Fa-f]{1,4}:)?([0-9A-Fa-f]{1,4})(\\/[0-9]{1,3})?([%][a-zA-Z0-9]+)?/\\1:XX:XX:XX:XX:XX:XX:\\4\\5\\6/g",
+        "s/\\[([0-9A-Fa-f]{1,4}):([0-9A-Fa-f]{1,4}:)?::([0-9A-Fa-f]{1,4}:)?([0-9A-Fa-f]{1,4})(\\/[0-9]{1,3})?([%][a-zA-Z0-9]+)?\\]/[\\1:XX:XX:XX:XX:XX:XX:\\4\\5\\6]/g"
     ],
     "commands": [
         {
@@ -19,7 +25,7 @@
             "file": "tailscale-debug-prefs.txt"
         },
         {
-            "command": "tailscale lock status",
+            "command": "tailscale lock status | head -1",
             "file": "tailscale-lock-status.txt"
         },
         {
@@ -66,10 +72,9 @@
     "files": [
         "/boot/config/plugins/tailscale/tailscale.cfg",
         "/etc/resolv.conf",
-        "/etc/ssh/sshd_config",
-        "/etc/nginx/conf.d/servers.conf",
         "/etc/samba/smb-names.conf",
-        "/var/log/tailscale*"
-    ],
+        "/var/log/tailscale.log",
+        "/var/log/tailscale-utils.log",
+        "/var/log/tailscale-error.log"],
     "system_diagnostics": true
 }
